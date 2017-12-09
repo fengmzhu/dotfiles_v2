@@ -6,4 +6,5 @@
 [push]
 	default = simple
 [core]
+	pager =
 	editor = vim
