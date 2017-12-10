@@ -35,6 +35,7 @@
 				set undodir=~/.undodir/
 				set undofile
 			endif
+			map <leader><leader>u :UndotreeToggle<cr>
 		"}}}
 		"vimwiki"{{{
 			let g:vimwiki_folding='syntax'
@@ -89,6 +90,8 @@
 		set history=500
 		set path+=**
 		set hlsearch            " Highlight search results
+		set incsearch           " Makes search act like search in modern browsers
+		set lazyredraw          " Don't redraw while executing macros (good performance config)
 		set noswapfile
 		set mouse=a
 		set autochdir
@@ -193,6 +196,9 @@
 		map <leader>sp [s
 		map <leader>sa zg
 		map <leader>s? z=
+	"}}}
+	"Customized"{{{
+		map <leader>d :r! date +"\%Y-\%m-\%d \%H:\%M:\%S"<ESC>0=j
 	"}}}
 "}}}
 " Helper Functions "{{{
