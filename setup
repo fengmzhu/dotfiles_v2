@@ -7,6 +7,7 @@ updateGitRepo();
 my $shellType = $ENV{SHELL};
 my $dotfiles = decideDotfiles($shellType);
 backupAndSymlink($dotfiles);
+displayNextAction();
 
 sub decideDotfiles {#{{{
 	my ($shellType) = @_;
@@ -64,3 +65,6 @@ sub updateGitRepo {#{{{
 		exit;
 	}
 }#}}}
+sub displayNextAction {
+	print "\nNEXT ACTION: open vim and execute ':PluginInstall' to install Vundle plugins\n";
+}
