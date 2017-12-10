@@ -60,4 +60,7 @@ sub createBackupDir {#{{{
 }#}}}
 sub updateGitRepo {#{{{
 	system("git submodule update --init --recursive");
+	if (@ARGV && $ARGV[0] eq "-gitonly") {
+		exit;
+	}
 }#}}}

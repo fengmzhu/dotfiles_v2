@@ -1,14 +1,49 @@
-"Vundle "{{{
-	set nocompatible
-	filetype off
-	set rtp+=~/.vim/bundle/Vundle.vim
-	call vundle#begin()
+" Vundle "{{{
+	" Vundle setup"{{{
+		set nocompatible
+		filetype off
+		set rtp+=~/.vim/vundle/Vundle.vim
+		call vundle#begin()
 
-	Plugin 'VundleVim/Vundle.vim'
-	"Plugin 'git://git.wincent.com/command-t.git'
+		Plugin 'VundleVim/Vundle.vim'
 
-	call vundle#end()
-	filetype plugin indent on
+		Plugin 'https://github.com/mbbill/undotree.git'
+		Plugin 'https://github.com/junegunn/vim-easy-align.git'
+		Plugin 'https://github.com/vimwiki/vimwiki.git'
+		Plugin 'https://github.com/scrooloose/nerdtree.git'
+		Plugin 'https://github.com/vim-scripts/mru.vim.git'
+		Plugin 'https://github.com/vim-airline/vim-airline.git'
+		Plugin 'https://github.com/vim-airline/vim-airline-themes.git'
+
+		call vundle#end()
+		filetype plugin indent on
+		"use :PluginInstall to install Vundle plugins
+	"}}}
+	" Plugin setting"{{{
+		"Nerd tree"{{{
+			map <leader>nn :NERDTreeToggle<cr>
+			map <leader>nb :NERDTreeFromBookmark
+			map <leader>nf :NERDTreeFind<cr>
+			let NERDTreeShowBookmarks=1
+		"}}}
+		" EasyAlign"{{{
+			xmap ga <Plug>(EasyAlign)
+			nmap ga <Plug>(EasyAlign)
+		"}}}
+		" undo-tree"{{{
+			if has("persistent_undo")
+				set undodir=~/.undodir/
+				set undofile
+			endif
+		"}}}
+		"vimwiki"{{{
+			let g:vimwiki_folding='syntax'
+		"}}}
+		" airline"{{{
+			let g:airline_theme='molokai'
+			let g:airline#extensions#tabline#enabled = 1
+		"}}}
+	"}}}
 "}}}
 " Leader"{{{
 	let mapleader = "\<Space>"
