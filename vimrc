@@ -205,6 +205,7 @@
 		nnoremap <leader>vt  :vs ~/vimwiki/tmp.wiki<CR>
 		nnoremap <leader>vw  :vs ~/vimwiki/index.wiki<CR>
 		nnoremap <leader>ev  :vs ~/.vimrc<CR>
+		nnoremap <leader>m   :MRU<CR>
 	"}}}
 "}}}
 " Helper Functions "{{{
