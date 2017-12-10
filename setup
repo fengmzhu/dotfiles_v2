@@ -1,0 +1,60 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Cwd;
+
+my $dotfileDirPath = cwd; 
+my $shellType = $ENV{SHELL};
+my $dotfiles = decideDotfiles($shellType);
+backupAndSymlink($dotfiles);
+
+sub decideDotfiles {#{{{
+	my ($shellType) = @_;
+	my $BASIC_FILES = [
+		"vimrc",
+		"vim",
+		"tmux.conf",
+		"gitconfig",
+	];
+	my $BASH_FILES = [
+		"bash_aliases"
+	];
+	my $dotfiles = [];
+	push @$dotfiles, @$BASIC_FILES;
+	push @$dotfiles, @$BASH_FILES if ($shellType =~ /bash/);
+	return $dotfiles;
+}#}}}
+sub backupAndSymlink {#{{{
+	my ($dotfiles) = @_;
+	my $backupDirPath = createBackupDir(cwd);
+	foreach my $dotfile (@$dotfiles) {
+		print "backup and symlink .$dotfile\n";
+		backupHomeFolderDotfile($backupDirPath, $dotfile);
+		symlinkToHome($dotfile);
+	}
+}#}}}
+sub symlinkToHome {#{{{
+	my ($dotfile) = @_;
+	my $dotfilePath = sprintf "%s/%s", cwd, $dotfile;
+	my $homeDotfilePath = sprintf "%s/.%s", $ENV{"HOME"}, $dotfile;
+	symlink($dotfilePath, $homeDotfilePath);
+}#}}}
+sub backupHomeFolderDotfile {#{{{
+	my ($backupDirPath, $dotfile) = @_;
+	my $homeDotfilePath = sprintf "%s/.%s", $ENV{"HOME"}, $dotfile;
+	if (-e $homeDotfilePath || lstat $homeDotfilePath) {
+		system("mv $homeDotfilePath $backupDirPath");
+	} 
+}#}}}
+sub createBackupDir {#{{{
+	my ($currentPath) = @_;
+	my $index = 1;
+	my $backupDir;
+	my $backupDirPath;
+	do { 
+		$backupDir = sprintf ".old_dotfiles_%d", $index++;
+		$backupDirPath = "$currentPath/$backupDir";
+	} while (-d $backupDirPath);
+	system("mkdir $backupDirPath");
+	return $backupDirPath;
+}#}}}
