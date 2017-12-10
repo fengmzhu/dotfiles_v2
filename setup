@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Cwd;
 
-my $dotfileDirPath = cwd; 
+updateGitRepo();
 my $shellType = $ENV{SHELL};
 my $dotfiles = decideDotfiles($shellType);
 backupAndSymlink($dotfiles);
@@ -44,17 +44,20 @@ sub backupHomeFolderDotfile {#{{{
 	my $homeDotfilePath = sprintf "%s/.%s", $ENV{"HOME"}, $dotfile;
 	if (-e $homeDotfilePath || lstat $homeDotfilePath) {
 		system("mv $homeDotfilePath $backupDirPath");
-	} 
+	}
 }#}}}
 sub createBackupDir {#{{{
 	my ($currentPath) = @_;
 	my $index = 1;
 	my $backupDir;
 	my $backupDirPath;
-	do { 
+	do {
 		$backupDir = sprintf ".old_dotfiles_%d", $index++;
 		$backupDirPath = "$currentPath/$backupDir";
 	} while (-d $backupDirPath);
 	system("mkdir $backupDirPath");
 	return $backupDirPath;
+}#}}}
+sub updateGitRepo {#{{{
+	system("git submodule update --init --recursive");
 }#}}}
