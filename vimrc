@@ -200,8 +200,11 @@
 		map <leader>sa zg
 		map <leader>s? z=
 	"}}}
-	"Customized"{{{
-		map <leader>d :r! date +"\%Y-\%m-\%d \%H:\%M:\%S"<ESC>0=j
+	"Customization"{{{
+		nnoremap <leader>d :r! date +"\%Y-\%m-\%d \%H:\%M:\%S"<ESC>0=j
+		nnoremap <leader>vt  :vs ~/vimwiki/tmp.wiki<CR>
+		nnoremap <leader>vw  :vs ~/vimwiki/index.wiki<CR>
+		nnoremap <leader>ev  :vs ~/.vimrc<CR>
 	"}}}
 "}}}
 " Helper Functions "{{{
