@@ -10,12 +10,10 @@
 	call vundle#end()
 	filetype plugin indent on
 "}}}
-"
 " Leader"{{{
 	let mapleader = "\<Space>"
 	let g:mapleader = "\<Space>"
 "}}}
-
 " Fast saving"{{{
 	nmap <leader>q :q<cr>
 	nmap <leader>qq :q!<cr>
@@ -24,14 +22,12 @@
 	nmap <leader>w :w!<cr>
 	nmap <leader>wq :wq!<cr>
 "}}}
-
 " Syntax & coloring"{{{
 	syntax on    " Enable syntax highlighting
 	colo molokai " color scheme
 	let g:molokai_original = 1
 	hi Visual term=reverse cterm=reverse guibg=Grey
 "}}}
-
 " Pane switching"{{{
 	if exists('$TMUX')
 		function! TmuxOrSplitSwitch(wincmd, tmuxdir)
@@ -58,3 +54,25 @@
 		nnoremap <C-l> <C-w>l
 	endif
 "}}}
+set foldmethod=marker
+"hotkey
+imap ;; <c-x><c-p>
+" Set 7 lines to the cursor - when moving vertically using j/k
+set so=7
+" Change window size"{{{
+nnoremap <leader>j :resize +5<cr>
+nnoremap <leader>k :resize -5<cr>
+nnoremap <leader>h :vertical resize -5<cr>
+nnoremap <leader>l :vertical resize +5<cr>
+
+nnoremap <leader>jj :resize +15<cr>
+nnoremap <leader>kk :resize -15<cr>
+nnoremap <leader>hh :vertical resize -25<cr>
+nnoremap <leader>ll :vertical resize +25<cr>
+
+nnoremap <leader>jjj :resize +100<cr>
+nnoremap <leader>kkk :resize -100<cr>
+nnoremap <leader>hhh :vertical resize -100<cr>
+nnoremap <leader>lll :vertical resize +100<cr>
+"}}}
+hi MatchParen cterm=bold ctermbg=magenta ctermfg=white 
