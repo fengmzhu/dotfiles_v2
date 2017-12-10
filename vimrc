@@ -1,3 +1,7 @@
+" Leader"{{{
+	let mapleader = "\<Space>"
+	let g:mapleader = "\<Space>"
+"}}}
 " Vundle "{{{
 	" Vundle setup"{{{
 		set nocompatible
@@ -45,10 +49,6 @@
 			let g:airline#extensions#tabline#enabled = 1
 		"}}}
 	"}}}
-"}}}
-" Leader"{{{
-	let mapleader = "\<Space>"
-	let g:mapleader = "\<Space>"
 "}}}
 " Configuration"{{{
 	" Encoding"{{{
