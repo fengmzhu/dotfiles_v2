@@ -8,3 +8,4 @@
 [core]
 	pager =
 	editor = vim
+	excludesfile = ~/.gitignore
