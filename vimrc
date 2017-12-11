@@ -39,7 +39,7 @@
 				set undodir=~/.undodir/
 				set undofile
 				if !isdirectory(expand(&undodir))
-				    call mkdir(expand(&undodir), "p")
+					call mkdir(expand(&undodir), "p")
 				endif
 			endif
 			map <leader><leader>u :UndotreeToggle<cr>
