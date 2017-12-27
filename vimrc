@@ -76,6 +76,7 @@
 		set cmdheight=2
 		set nowrap
 		set foldcolumn=1        " Add a bit extra margin to the left
+		set tw=0
 	"}}}
 	" Appearances Color Scheme"{{{
 		syntax on    " Enable syntax highlighting
