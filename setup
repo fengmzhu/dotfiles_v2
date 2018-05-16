@@ -19,7 +19,8 @@ sub decideDotfiles {#{{{
 		"gitconfig",
 	];
 	my $BASH_FILES = [
-		"bash_aliases"
+		"bash_aliases",
+		"bashrc.private"
 	];
 	my $dotfiles = [];
 	push @$dotfiles, @$BASIC_FILES;

@@ -200,6 +200,7 @@
 		map <leader>sp [s
 		map <leader>sa zg
 		map <leader>s? z=
+		map <leader>sl :set filetype=log<cr>
 	"}}}
 	"Customization"{{{
 		nnoremap <leader>d :r! date +"\%Y-\%m-\%d \%H:\%M:\%S"<ESC>0=j

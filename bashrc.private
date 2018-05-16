@@ -1,0 +1,17 @@
+
+PS1='> '
+set -o vi
+ssh-add ~/.ssh/id_rsa >/dev/null 2>&1
+
+export LC_ALL="en_US.UTF-8"
+#export PATH="~/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/macvim/bin:/usr/local/bin:$PATH"
+#export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+#export OFEXPORT_HOME="/Users/greedgenius/Documents/scripts/ofexport"
+#export PATH=$PATH:"$OFEXPORT_HOME/bin"
+
+export TIME_STYLE=long-iso
+
+#show files in color
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+

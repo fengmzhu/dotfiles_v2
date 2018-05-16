@@ -16,6 +16,7 @@ alias bs='. ~/.bashrc'
 
 alias h='history'
 alias c="clear"
+alias ct="cd ~/Documents/writing/theories"
 
 if [ -f ~/.bash_aliases.private ]; then
 	. ~/.bash_aliases.private
