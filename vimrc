@@ -18,6 +18,8 @@
 		Plugin 'https://github.com/vim-scripts/mru.vim.git'
 		Plugin 'https://github.com/vim-airline/vim-airline.git'
 		Plugin 'https://github.com/vim-airline/vim-airline-themes.git'
+		Plugin 'SirVer/ultisnips'
+		Plugin 'honza/vim-snippets'
 
 		call vundle#end()
 		filetype plugin indent on
