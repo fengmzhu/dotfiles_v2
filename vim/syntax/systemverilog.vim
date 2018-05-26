@@ -55,39 +55,39 @@ syn keyword systemverilogStatement   typedef union unique unsigned use var vecto
 syn keyword systemverilogStatement   void wait wait_order wand weak0 weak1
 syn keyword systemverilogStatement   while wildcard wire with within wor xnor xor
 
-" LRM 3.7 String methods:
-syn keyword systemverilogStatement   len getc putc toupper tolower compare
-syn keyword systemverilogStatement   icompare substr
-syn keyword systemverilogStatement   itoa hextoa octtoa bintoa realtoa
-syn keyword systemverilogStatement   atoi atohex atooct atobin atoreal
-" LRM 3.8 events:
-syn keyword systemverilogStatement   triggered
-" LRM 3.10 methods for enumerated types:
-syn keyword systemverilogStatement   first last next prev num name
-" LRM 4.6 Dynamic Arrays:
-syn keyword systemverilogStatement   delete
-" LRM 4.10 Associative Array methods:
-syn keyword systemverilogStatement   num exists
-" LRM 4.15.1 Array locator methods:
-syn keyword systemverilogStatement   find find_index find_first find_first_index
-syn keyword systemverilogStatement   find_last find_last_index min max unique unique_index
-" LRM 4.15.2 Array ordering methods:
-syn keyword systemverilogStatement   reverse sort rsort shuffle
-" LRM 4.15.3 Array reduction methods:
-syn keyword systemverilogStatement   sum product
-" LRM 4.15.4 Array iterator query:
-syn keyword systemverilogStatement   index
-"" LRM 7.10.1 Builtin package:
-syn keyword systemverilogStatement   std
-" LRM Annex C standard library
-syn keyword systemverilogStatement   get put try_get try_put peek try_peek
-syn keyword systemverilogStatement   status kill self await suspend resume
-" LRM Annex D List methods
-syn keyword systemverilogStatement   next prev eq neq data
-syn keyword systemverilogStatement   size empty push_front push_back
-syn keyword systemverilogStatement   front back pop_front pop_back
-syn keyword systemverilogStatement   start finish insert insert_range
-syn keyword systemverilogStatement   erase erase_range set swap clear purge
+"" LRM 3.7 String methods:
+"syn keyword systemverilogStatement   len getc putc toupper tolower compare
+"syn keyword systemverilogStatement   icompare substr
+"syn keyword systemverilogStatement   itoa hextoa octtoa bintoa realtoa
+"syn keyword systemverilogStatement   atoi atohex atooct atobin atoreal
+"" LRM 3.8 events:
+"syn keyword systemverilogStatement   triggered
+"" LRM 3.10 methods for enumerated types:
+"syn keyword systemverilogStatement   first last next prev num name
+"" LRM 4.6 Dynamic Arrays:
+"syn keyword systemverilogStatement   delete
+"" LRM 4.10 Associative Array methods:
+"syn keyword systemverilogStatement   num exists
+"" LRM 4.15.1 Array locator methods:
+"syn keyword systemverilogStatement   find find_index find_first find_first_index
+"syn keyword systemverilogStatement   find_last find_last_index min max unique unique_index
+"" LRM 4.15.2 Array ordering methods:
+"syn keyword systemverilogStatement   reverse sort rsort shuffle
+"" LRM 4.15.3 Array reduction methods:
+"syn keyword systemverilogStatement   sum product
+"" LRM 4.15.4 Array iterator query:
+"syn keyword systemverilogStatement   index
+""" LRM 7.10.1 Builtin package:
+"syn keyword systemverilogStatement   std
+"" LRM Annex C standard library
+"syn keyword systemverilogStatement   get put try_get try_put peek try_peek
+"syn keyword systemverilogStatement   status kill self await suspend resume
+"" LRM Annex D List methods
+"syn keyword systemverilogStatement   next prev eq neq data
+"syn keyword systemverilogStatement   size empty push_front push_back
+"syn keyword systemverilogStatement   front back pop_front pop_back
+"syn keyword systemverilogStatement   start finish insert insert_range
+"syn keyword systemverilogStatement   erase erase_range set swap clear purge
 
 " UVM Keyword"{{{
 syn keyword uvm_keyword   uvm_object
@@ -109,22 +109,36 @@ syn keyword uvm_keyword   uvm_config_db
 syn keyword uvm_keyword   uvm_analysis_port
 syn keyword uvm_keyword   uvm_tlm_extension
 syn keyword uvm_keyword   uvm_tlm_if
-syn keyword uvm_keyword   uvm_field_int
-syn keyword uvm_keyword   uvm_config_db
+syn keyword uvm_keyword   uvm_resource_db
 syn keyword uvm_keyword   uvm_event
+syn keyword uvm_keyword   req
+
+syn keyword uvm_keyword   uvm_cmdline_processor
 "}}}
 " UVM Macro"{{{
 syn match uvm_macro   "`uvm_object_utils"
+syn match uvm_macro   "`uvm_object_utils_begin"
+syn match uvm_macro   "`uvm_object_utils_end"
+syn match uvm_macro   "`uvm_object_param_utils_begin"
 syn match uvm_macro   "`uvm_info"
+syn match uvm_macro   "`uvm_fatal"
 syn match uvm_macro   "`set_automatic_phase_objection"
 syn match uvm_macro   "`uvm_component_utils"
+syn match uvm_macro   "`uvm_component_utils_begin"
+syn match uvm_macro   "`uvm_component_utils_end"
 syn match uvm_macro   "`uvm_declare_p_sequencer"
+syn match uvm_macro   "`uvm_do"
+syn match uvm_macro   "`uvm_do_with"
 syn match uvm_macro   "`uvm_do_on"
 syn match uvm_macro   "`uvm_do_on_with"
+syn match uvm_macro   "`uvm_field_int"
+syn match uvm_macro   "`uvm_field_enum"
+syn match uvm_macro   "`uvm_field_queue_int"
 "}}}
 " UVM Functions"{{{
 syn keyword uvm_function   seq_item_port
 syn keyword uvm_function   get_next_item
+syn keyword uvm_function   item_done
 syn keyword uvm_function   try_next_item
 syn keyword uvm_function   build_phase
 syn keyword uvm_function   connect_phase
@@ -133,6 +147,8 @@ syn keyword uvm_function   uvm_phase
 syn keyword uvm_function   raise_objection
 syn keyword uvm_function   drop_objection
 syn keyword uvm_function   run_test
+syn keyword uvm_function   set_inst_override_by_type
+syn keyword uvm_function   set_type_override_by_type
 "}}}
 " UVM package"{{{
 syn keyword uvm_package   svt_uvm_pkg

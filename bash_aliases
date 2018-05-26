@@ -17,6 +17,7 @@ alias bs='. ~/.bashrc'
 alias h='history'
 alias c="clear"
 alias ct="cd ~/Documents/writing/theories"
+alias vsv="vim ~/.vim/syntax/systemverilog.vim"
 
 if [ -f ~/.bash_aliases.private ]; then
 	. ~/.bash_aliases.private
