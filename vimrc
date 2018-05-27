@@ -53,6 +53,12 @@
 			let g:airline_theme='molokai'
 			let g:airline#extensions#tabline#enabled = 1
 		"}}}
+		" UtilSnips"{{{
+			if !exists("g:UltiSnipsJumpForwardTrigger")
+				let g:UltiSnipsJumpForwardTrigger ="<tab>"
+				let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+			endif
+		"}}}
 	"}}}
 "}}}
 " Configuration"{{{
@@ -210,6 +216,8 @@
 		nnoremap <leader>vw  :vs ~/vimwiki/index.wiki<CR>
 		nnoremap <leader>ev  :vs ~/.vimrc<CR>
 		nnoremap <leader>m   :MRU<CR>
+		nnoremap <leader>sv  :set syntax=systemverilog<CR>
+		nnoremap <leader>sp  :set syntax=snippets<CR>
 	"}}}
 "}}}
 " Helper Functions "{{{
