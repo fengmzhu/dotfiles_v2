@@ -19,6 +19,8 @@ alias c="clear"
 alias ct="cd ~/Documents/writing/theories"
 alias vsv="vim ~/.vim/syntax/systemverilog.vim"
 
+alias docker_rmall='docker rm $(docker ps -a -q);docker rmi $(docker images -q); docker rmi $(docker images --filter "dangling=true" -q --no-trunc) -f'
+
 if [ -f ~/.bash_aliases.private ]; then
 	. ~/.bash_aliases.private
 fi
