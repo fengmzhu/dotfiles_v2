@@ -1,5 +1,6 @@
 alias setenv="export"
 
+alias vim="mvim -v"
 alias vi='vim'
 alias gs='git status'
 alias ls="ls --color=always"
@@ -18,6 +19,7 @@ alias h='history'
 alias c="clear"
 alias ct="cd ~/Documents/writing/theories"
 alias vsv="vim ~/.vim/syntax/systemverilog.vim"
+
 
 alias docker_rmall='docker rm $(docker ps -a -q);docker rmi $(docker images -q); docker rmi $(docker images --filter "dangling=true" -q --no-trunc) -f'
 

@@ -8,7 +8,7 @@ my $shellType = $ENV{SHELL};
 my $dotfiles = decideDotfiles($shellType);
 my $binScripts = getBinScripts();
 backupAndSymlink($dotfiles, $binScripts);
-displayNextAction();
+instalVimPlugin();
 
 sub decideDotfiles {#{{{
 	my ($shellType) = @_;
@@ -101,6 +101,7 @@ sub getBinScripts {#{{{
 	];
 	return $BIN_SCRIPTS;
 }#}}}
-sub displayNextAction {#{{{
-	print "\nNEXT ACTION: open vim and execute ':PluginInstall' to install Vundle plugins\n";
+sub instalVimPlugin {#{{{
+	#print "\nNEXT ACTION: open vim and execute ':PluginInstall' to install Vundle plugins\n";
+	system("vim +PluginInstall +qall");
 }#}}}

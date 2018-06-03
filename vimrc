@@ -20,6 +20,9 @@
 		Plugin 'https://github.com/vim-airline/vim-airline-themes.git'
 		Plugin 'SirVer/ultisnips'
 		Plugin 'honza/vim-snippets'
+		Plugin 'https://github.com/wincent/command-t.git'
+		Plugin 'https://github.com/Valloric/YouCompleteMe.git'
+		Plugin 'https://github.com/majutsushi/tagbar.git'
 
 		call vundle#end()
 		filetype plugin indent on
