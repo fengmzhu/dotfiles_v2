@@ -23,6 +23,7 @@
 		Plugin 'https://github.com/wincent/command-t.git'
 		Plugin 'https://github.com/Valloric/YouCompleteMe.git'
 		Plugin 'https://github.com/majutsushi/tagbar.git'
+		Plugin 'https://github.com/vim-syntastic/syntastic.git'
 
 		call vundle#end()
 		filetype plugin indent on
@@ -58,8 +59,29 @@
 		"}}}
 		" UtilSnips"{{{
 			if !exists("g:UltiSnipsJumpForwardTrigger")
+				let g:UltiSnipsExpandTrigger ="<tab>"
 				let g:UltiSnipsJumpForwardTrigger ="<tab>"
 				let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+			endif
+		"}}}
+		" YCM"{{{
+			if !exists("g:ycm_key_list_select_completion")
+				let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+				let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+				let g:SuperTabDefaultCompletionType = '<C-n>'
+				let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+			endif
+		"}}}
+		" YCM"{{{
+			if !exists("g:syntastic_check_on_open")
+				set statusline+=%#warningmsg#
+				set statusline+=%{SyntasticStatuslineFlag()}
+				set statusline+=%*
+
+				let g:syntastic_always_populate_loc_list = 1
+				let g:syntastic_auto_loc_list = 1
+				let g:syntastic_check_on_open = 1
+				let g:syntastic_check_on_wq = 0
 			endif
 		"}}}
 	"}}}
@@ -241,3 +263,5 @@
 		endfunction
 	"}}}
 ""}}}
+set tags=./tags;
+set tags+=~/.vim/tags/UVM
