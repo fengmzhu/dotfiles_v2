@@ -1,7 +1,6 @@
 alias setenv="export"
 
 if [ -f /usr/local/bin/mvim ]; then
-	echo "mvim found"
 	alias vim="mvim -v"
 fi
 alias vi='vim'
