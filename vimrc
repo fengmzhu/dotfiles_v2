@@ -24,6 +24,7 @@
 		Plugin 'https://github.com/Valloric/YouCompleteMe.git'
 		Plugin 'https://github.com/majutsushi/tagbar.git'
 		Plugin 'https://github.com/vim-syntastic/syntastic.git'
+		Plugin 'andymass/vim-matchup'
 
 		call vundle#end()
 		filetype plugin indent on
