@@ -5,9 +5,10 @@ clocking ${1:module_name} @(${2:posedge} ${3:clk});
 	$4
 endclocking : $1
 endsnippet
-snippet interface "interface"
+snippet interface "interface instantiate"
 interface ${1:module_name}(input bit ${2:clk});
-	$3
+	${3:logic a};
+	${4:modport mon (input a)};
 endinterface : $1
 endsnippet
 
@@ -34,6 +35,13 @@ virtual function ${1:void} ${2:func_name}();
 endfunction : $2
 endsnippet
 
+snippet enum "enum"
+enum {${1:READ}, ${2:WRITE}} ${3:trans};
+endsnippet
+
+snippet assert "assert"
+assert(${1:txn.randomize()});
+endsnippet
 
 #UVM example codes
 snippet package "package"
@@ -66,7 +74,7 @@ endsnippet
 
 #UVM key template
 #class
-snippet comp "uvm component"
+snippet uvm_comp "uvm component example"
 class ${1:class_name} extends ${2:uvm_env};
 \`uvm_component_utils($1)
 
@@ -84,7 +92,7 @@ function run_phase(uvm_phase phase);
 endtask: run_phase
 endclass: $1
 endsnippet
-snippet item "uvm sequence item"
+snippet uvm_seq_item "uvm sequence item example"
 class ${1:packet} extends uvm_sequence_item;
 rand bit [3:0] ${2:sa}, ${3:da};
 rand bit[7:0] ${4:payload}[$];
@@ -107,7 +115,7 @@ endfunction: new
 
 endclass: $1
 endsnippet
-snippet agent "uvm agent"
+snippet uvm_agent "uvm agent example"
 typedef class $1_driver;
 typedef class $1_monitor;
 
@@ -274,7 +282,7 @@ virtual task rd_detect(); //TODO: modify for seqeunce item
 endtask: rd_detect
 endclass: $1_monitor
 endsnippet
-snippet env "uvm env"
+snippet uvm_env "uvm env example"
 class ${1:router}_env extends uvm_env;
 \`uvm_component_utils($1_env)
 
@@ -364,7 +372,7 @@ endfunction: connect_phase
 
 endclass: $1_env
 endsnippet
-snippet driver "uvm_driver"
+snippet uvm_driver "uvm_driver example"
 class ${1:driver} extends uvm_driver #(${2:packet});
 virtual ${3:router_io} vif; // DUT virtual interface
 int     ${4:port_id} = -1;  // Driver's designated port
@@ -460,70 +468,7 @@ endtask: send_payload
 
 endclass: $1
 endsnippet
-
-#Instantiation
-snippet inst_agent "inst_agent"
-${1:host_agent}  ${2:h_agt};
-	//TODO:build phase
-	$2 = $1::type_id::create("$2", this);
-	uvm_config_db #(${3:ral_block_host_regmodel})::set(this, $2.get_name(), "regmodel", regmodel);
-	uvm_config_db #(uvm_object_wrapper)::set(this, {$2.get_name(), ".", "sqr.configure_phase"}, "default_sequence", ral_port_unlock_sequence::get_type());
-	$0
-	//TODO:connect phase
-	//regmodel.default_map.set_sequencer($2.sqr, adapter);
-	//$2.analysis_port.connect(hreg_predict.bus_in);
-endsnippet
-snippet inst_agent "inst_sb"
-${1:scoreboard}  ${2:sb};
-	//TODO:build phase
-	$2 = $1::type_id::create("$2", this);
-	//TODO:connect phase
-	${3:i_agt}.analysis_port.connect($2.before_export);
-	${4:o_agt}.analysis_port.connect($2.after_export);
-	$0
-endsnippet
-
-#Function
-snippet phase "uvm_phase"
-virtual function void ${1:build_phase}(uvm_phase phase);
-	super.$1(phase);
-	\`uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
-endfunction: $1
-endsnippet
-snippet new "constructor"
-function new (string name, uvm_component parent);
-	super.new(name, parent);
-	\`uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
-endfunction: new
-endsnippet
-
-
-#UVM useful code
-
-snippet topology "show uvm topology (test.sv)"
-virtual function void final_phase(uvm_phase phase);
-	super.final_phase(phase);
-	\`uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
-
-	if (uvm_report_enabled(UVM_DEBUG, UVM_INFO, "TOPOLOGY")) begin
-		uvm_root::get().print_topology();
-	end
-
-	if (uvm_report_enabled(UVM_DEBUG, UVM_INFO, "FACTORY")) begin
-		uvm_factory::get().print();
-	end
-endfunction: final_phase
-endsnippet
-snippet phase_raise_objection "phase_raise_objection"
-phase.raise_objection(this);
-//env.sb.wait_for_done();
-phase.drop_objection(this);
-endsnippet
-
-#UVM driver examples
-
-#monitor example
-snippet o_mon "output monitor"
+snippet uvm_mon_o "output monitor example"
 class ${1:oMonitor} extends uvm_monitor;
 int ${2:port_id} = -1;
 virtual ${3:router_io} vif;
@@ -597,7 +542,7 @@ endtask: get_packet
 
 endclass: $1
 endsnippet
-snippet i_mon "input monitor"
+snippet uvm_mon_i "input monitor example"
 class ${1:iMonitor} extends uvm_monitor;
 virtual ${2:router_io} vif;
 int     ${3:port_id} = -1;
@@ -701,6 +646,68 @@ endtask: get_packet
 endclass: $1
 endsnippet
 
+#Instantiation
+snippet inst_agent "inst_agent"
+${1:host_agent}  ${2:h_agt};
+	//TODO:build phase
+	$2 = $1::type_id::create("$2", this);
+	uvm_config_db #(${3:ral_block_host_regmodel})::set(this, $2.get_name(), "regmodel", regmodel);
+	uvm_config_db #(uvm_object_wrapper)::set(this, {$2.get_name(), ".", "sqr.configure_phase"}, "default_sequence", ral_port_unlock_sequence::get_type());
+	$0
+	//TODO:connect phase
+	//regmodel.default_map.set_sequencer($2.sqr, adapter);
+	//$2.analysis_port.connect(hreg_predict.bus_in);
+endsnippet
+snippet inst_agent "inst_sb"
+${1:scoreboard}  ${2:sb};
+	//TODO:build phase
+	$2 = $1::type_id::create("$2", this);
+	//TODO:connect phase
+	${3:i_agt}.analysis_port.connect($2.before_export);
+	${4:o_agt}.analysis_port.connect($2.after_export);
+	$0
+endsnippet
+
+#Function
+snippet phase "uvm_phase"
+virtual function void ${1:build_phase}(uvm_phase phase);
+	super.$1(phase);
+	\`uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+endfunction: $1
+endsnippet
+snippet phases "list all uvm phases"
+//build connect end_of_elaboration run extract report final
+//reset configure main shutdown (pre_* post_*)
+endsnippet
+snippet new "constructor"
+function new (string name, uvm_component parent);
+	super.new(name, parent);
+	\`uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+endfunction: new
+endsnippet
+
+
+#UVM useful code
+snippet topology "show uvm topology (test.sv)"
+virtual function void final_phase(uvm_phase phase);
+	super.final_phase(phase);
+	\`uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+
+	if (uvm_report_enabled(UVM_DEBUG, UVM_INFO, "TOPOLOGY")) begin
+		uvm_root::get().print_topology();
+	end
+
+	if (uvm_report_enabled(UVM_DEBUG, UVM_INFO, "FACTORY")) begin
+		uvm_factory::get().print();
+	end
+endfunction: final_phase
+endsnippet
+snippet phase_raise_objection "phase_raise_objection"
+phase.raise_objection(this);
+//env.sb.wait_for_done();
+phase.drop_objection(this);
+endsnippet
+
 #UVM example code
 #test_base extends uvm_test
 snippet test_set_vif "test.sv set vif"
@@ -731,24 +738,30 @@ top_reset_sqr.r_sqr = env.r_agt.sqr;
 top_reset_sqr.h_sqr = env.h_agt.sqr;
 endsnippet
 
-snippet set_type_override_by_type "set_type_override_by_type"
-	set_type_override_by_type(${1:scoreboard}::get_type(),${2:ms_scoreboard}::get_type());
-	$0
+snippet set_type_ot "set_type_override_by_type"
+set_type_override_by_type(${1:scoreboard}::get_type(),${2:ms_scoreboard}::get_type());
 endsnippet
-snippet config_db "uvm_config_db usage"
-	uvm_config_db#(${1:int})::get(this, "", "${2:id}", id);
-	uvm_config_db#(${1:int})::set(this, "*", "${2:id}", id);
-	//uvm_config_db #(uvm_object_wrapper)::set(this, {h_agt.get_name(), ".", "sqr.configure_phase"}, "default_sequence", ral_port_unlock_sequence::get_type());
+snippet set_inst_ot "set_inst_override_by_type"
+set_inst_override_by_type("${1:env.agt}", "${1:agent}::get_type(),${2:new_agt}::get_type());
+endsnippet
+snippet uvm_confs "uvm_config_db set"
+uvm_config_db#(${1:int})::set(this, "*", "${2:id}", id);
+endsnippet
+snippet uvm_confg "uvm_config_db get"
+uvm_config_db#(${1:int})::get(this, "", "${2:id}", id);
+endsnippet
+snippet uvm_confss "uvm_config_db set sequence"
+uvm_config_db #(uvm_object_wrapper)::set(this, {${1:h_agt}.get_name(), ".", "${2:sqr.configure_phase}"}, "${3:default_sequence}", ${4:ral_port_unlock_sequence}::get_type());
 endsnippet
 snippet create "facotry create"
-	${1:sb} = ${2:scoreboard}::type_id::create("$1", this);
+${1:sb} = ${2:scoreboard}::type_id::create("$1", this);
 endsnippet
-snippet `uvm_component_utils_begin "short hand macro"
+snippet `uvm_compb "uvm_component_utils_begin"
 \`uvm_component_utils_begin(${1:iMonitor})
 	\`uvm_field_int(${2:port_id}, UVM_ALL_ON | UVM_DEC)
 \`uvm_component_utils_end
 endsnippet
-snippet `uvm_object_utils_begin "short hand macro"
+snippet `uvm_objub "uvm_object_utils_begin"
 \`uvm_object_utils_begin(${1:packet})
 	\`uvm_field_int(${2:sa}, UVM_ALL_ON | UVM_NOCOMPARE)
 	\`uvm_field_int(${3:da}, UVM_ALL_ON)
@@ -757,6 +770,25 @@ snippet `uvm_object_utils_begin "short hand macro"
 endsnippet
 snippet constraint "constraint"
 constraint ${1:valid} {
-	${2:payload}.size inside {[1:10]};
+	${2:len > 0};
+	${3:payload}.size inside {[1:10]};
 }
 endsnippet
+
+snippet `uvm_info "uvm_info"
+\`uvm_info("${1:TRACE}", ${2:$sformatf("%m")}, ${3:UVM_HIGH});
+endsnippet
+snippet `uvm_warn "uvm_warning"
+\`uvm_warning("${1:TRACE}", ${2:$sformatf("%m")});
+endsnippet
+snippet `uvm_error "uvm_error"
+\`uvm_error("${1:TRACE}", ${2:$sformatf("%m")});
+endsnippet
+snippet `uvm_fatal "uvm_fatal"
+\`uvm_fatal("${1:TRACE}", ${2:$sformatf("%m")});
+endsnippet
+snippet UVM_v "list verbosity levels"
+//DEBUG FULL HIGH LOW MEDIUM NONE
+endsnippet
+
+
