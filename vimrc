@@ -266,3 +266,4 @@
 ""}}}
 set tags=./tags;
 set tags+=~/.vim/tags/UVM
+hi MatchParen cterm=none ctermbg=darkgrey ctermfg=grey

@@ -185,7 +185,7 @@ syn match systemverilogGlobal "`resetall"
 syn match systemverilogGlobal "`timescale"
 syn match systemverilogGlobal "`unconnected_drive"
 syn match systemverilogGlobal "`undef"
-syn match   systemverilogGlobal "$[a-zA-Z0-9_]\+\>"
+syn match systemverilogGlobal "$[a-zA-Z0-9_]\+\>"
 
 syn match   systemverilogConstant "\<[A-Z][A-Z0-9_]\+\>"
 
@@ -250,3 +250,30 @@ endif
 let b:current_syntax = "systemverilog"
 
 " vim: ts=2
+" complete match keywords{{{
+"filetype plugin on
+"source ~/.vim/plugin/matchit.vim
+if exists('loaded_matchit')
+				let b:match_ignorecase=0
+				let b:match_words=
+				  \ '\<begin\>:\<end\>,' .
+				  \ '\<if\>:\<else\>,' .
+				  \ '\<module\>:\<endmodule\>,' .
+				  \ '\<class\>:\<endclass\>,' .
+				  \ '\<program\>:\<endprogram\>,' .
+				  \ '\<clocking\>:\<endclocking\>,' .
+				  \ '\<property\>:\<endproperty\>,' .
+				  \ '\<sequence\>:\<endsequence\>,' .
+				  \ '\<package\>:\<endpackage\>,' .
+				  \ '\<covergroup\>:\<endgroup\>,' .
+				  \ '\<primitive\>:\<endprimitive\>,' .
+				  \ '\<specify\>:\<endspecify\>,' .
+				  \ '\<generate\>:\<endgenerate\>,' .
+				  \ '\<interface\>:\<endinterface\>,' .
+				  \ '\<function\>:\<endfunction\>,' .
+				  \ '\<task\>:\<endtask\>,' .
+				  \ '\<case\>\|\<casex\>\|\<casez\>:\<endcase\>,' .
+				  \ '\<fork\>:\<join\>\|\<join_any\>\|\<join_none\>,' .
+				  \ '`ifdef\>:`else\>:`endif\>,'
+endif
+"}}}

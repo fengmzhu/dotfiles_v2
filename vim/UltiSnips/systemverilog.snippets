@@ -1,11 +1,12 @@
 # ~/.vim/UltiSnips/systemverilog.snippets
+extends verilog
 
 snippet clocking "clocking"
 clocking ${1:module_name} @(${2:posedge} ${3:clk});
 	$4
 endclocking : $1
 endsnippet
-snippet interface "interface instantiate"
+snippet intf "interface instantiate"
 interface ${1:module_name}(input bit ${2:clk});
 	${3:logic a};
 	${4:modport mon (input a)};
@@ -24,11 +25,6 @@ task ${1:task_name}($2);
 	$3
 endtask : $1
 endsnippet
-snippet func "function"
-function ${1:void} ${2:func_name}();
-	${3:${VISUAL}}
-endfunction : $2
-endsnippet
 snippet vfunc "virtual function"
 virtual function ${1:void} ${2:func_name}();
 	${3:${VISUAL}}
@@ -41,6 +37,9 @@ endsnippet
 
 snippet assert "assert"
 assert(${1:txn.randomize()});
+endsnippet
+snippet typedefs "typedef sequencer"
+typedef uvm_sequencer #($1_data) $1_sequencer;
 endsnippet
 
 #UVM example codes
